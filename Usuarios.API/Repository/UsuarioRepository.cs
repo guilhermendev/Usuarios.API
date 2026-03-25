@@ -16,7 +16,7 @@ namespace Usuarios.API.Repository
 
         public void Criar (Usuario usuario)
         {
-            var sql = "INSERT INTO Usuarios (Nome_Completo, Data_Nascimento, Cpf) VALUES (@NomeCompleto, @DataNascimento,@Cpf)";
+            var sql = "INSERT INTO Usuario (Nome_Completo, Data_Nascimento, Cpf) VALUES (@NomeCompleto, @DataNascimento,@Cpf)";
             _connection.Execute(sql, usuario);
         }
     }
