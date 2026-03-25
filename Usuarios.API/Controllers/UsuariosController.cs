@@ -23,10 +23,19 @@ namespace Usuarios.API.Controllers
         }
 
         [HttpGet]
-        public IActionResult BuscarTodos() 
+        public IActionResult BuscarTodos()
         {
             var usuarios = _service.BuscarTodos();
             return Ok(usuarios);
+        }
+
+        [HttpGet("{id}")]
+        public IActionResult BuscarPorId(int id)
+        {
+            var usuario = _service.BuscarPorId(id);
+            if (usuario == null)
+                return NotFound("Usuário não encontrado.");
+            return Ok(usuario);
         }
     }
 }

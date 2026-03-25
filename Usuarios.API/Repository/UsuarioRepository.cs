@@ -3,6 +3,7 @@ using Usuarios.API.Entidade;
 using System.Data;
 
 
+
 namespace Usuarios.API.Repository
 {
     public class UsuarioRepository : IUsuarioRepository
@@ -21,8 +22,13 @@ namespace Usuarios.API.Repository
         }
         public IEnumerable<Usuario> BuscarTodos()
         {
-            var sql = "SELECT Id, Nome_completo AS NomeCompleto, Data_Nascimento AS DataNascimento, Cpf FROM usuario";
+            var sql = "SELECT Id, Nome_Completo AS NomeCompleto, Data_Nascimento AS DataNascimento, Cpf FROM usuario";
             return _connection.Query<Usuario>(sql);
+        }
+        public Usuario BuscarPorId(int id)
+        {
+            var sql = "SELECT Id, Nome_Completo AS NomeCompleto, Data_Nascimento AS DataNascimento, Cpf FROM usuario WHERE Id = @Id";
+            return _connection.QueryFirstOrDefault<Usuario>(sql, new { Id = id });
         }
     }
 }

@@ -27,5 +27,10 @@ namespace Usuarios.API.Service
         {
             return _Repository.BuscarTodos();
         }
-    }
+
+        public Usuario BuscarPorId(int id)
+        {
+            return _Repository.BuscarPorId(id);
+        }
+     }
 }
