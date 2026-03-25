@@ -21,5 +21,12 @@ namespace Usuarios.API.Controllers
             _service.Criar(dto);
             return Ok("Usuário criado com sucesso!");
         }
+
+        [HttpGet]
+        public IActionResult BuscarTodos() 
+        {
+            var usuarios = _service.BuscarTodos();
+            return Ok(usuarios);
+        }
     }
 }

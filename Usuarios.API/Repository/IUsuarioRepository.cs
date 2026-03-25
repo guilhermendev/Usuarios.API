@@ -6,5 +6,6 @@ namespace Usuarios.API.Repository
     public interface IUsuarioRepository
     {
         void Criar (Usuario usuario);
+        IEnumerable<Usuario> BuscarTodos();
     }
 }

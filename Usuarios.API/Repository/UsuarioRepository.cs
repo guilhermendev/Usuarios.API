@@ -14,10 +14,15 @@ namespace Usuarios.API.Repository
             _connection = connection;
         }
 
-        public void Criar (Usuario usuario)
+        public void Criar(Usuario usuario)
         {
             var sql = "INSERT INTO Usuario (Nome_Completo, Data_Nascimento, Cpf) VALUES (@NomeCompleto, @DataNascimento,@Cpf)";
             _connection.Execute(sql, usuario);
+        }
+        public IEnumerable<Usuario> BuscarTodos()
+        {
+            var sql = "SELECT Id, Nome_completo AS NomeCompleto, Data_Nascimento AS DataNascimento, Cpf FROM usuario";
+            return _connection.Query<Usuario>(sql);
         }
     }
 }

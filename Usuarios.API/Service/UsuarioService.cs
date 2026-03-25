@@ -1,6 +1,7 @@
 ﻿using Usuarios.API.DTOs;
 using Usuarios.API.Mapping;
 using Usuarios.API.Repository;
+using Usuarios.API.Entidade;
 
 namespace Usuarios.API.Service
 {
@@ -20,7 +21,11 @@ namespace Usuarios.API.Service
 
             var usuario = _mapping.UsuarioRequestDtoToUsuario(dto);
             _Repository.Criar(usuario);
+        }
 
+        public IEnumerable<Usuario> BuscarTodos()
+        {
+            return _Repository.BuscarTodos();
         }
     }
 }
