@@ -37,5 +37,13 @@ namespace Usuarios.API.Controllers
                 return NotFound("Usuário não encontrado.");
             return Ok(usuario);
         }
+
+        [HttpPut("{id}")]
+
+        public IActionResult Atualizar(int id, [FromBody] UsuarioRequestDto dto)
+        {
+           _service.Atualizar(id, dto);
+            return Ok("Usuário atualizado com sucesso!");
+        }
     }
 }

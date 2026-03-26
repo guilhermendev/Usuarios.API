@@ -30,5 +30,12 @@ namespace Usuarios.API.Repository
             var sql = "SELECT Id, Nome_Completo AS NomeCompleto, Data_Nascimento AS DataNascimento, Cpf FROM usuario WHERE Id = @Id";
             return _connection.QueryFirstOrDefault<Usuario>(sql, new { Id = id });
         }
+
+        public void Atualizar(int id, Usuario usuario)
+        {
+            var sql = "UPDATE Usuario SET Nome_Completo = @NomeCompleto, Data_Nascimento = @DataNascimento, Cpf = @Cpf WHERE Id = @Id";
+            usuario.Id = id;
+            _connection.Execute(sql, usuario);
+        }
     }
 }
