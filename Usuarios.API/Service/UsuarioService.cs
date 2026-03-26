@@ -32,6 +32,13 @@ namespace Usuarios.API.Service
         {
             return _Repository.BuscarPorId(id);
         }
+
+        public void Atualizar(int id, UsuarioRequestDto dto)
+        {
+            var usuario = _mapping.UsuarioRequestDtoToUsuario(dto);
+            _Repository.Atualizar(id, usuario);
+        } 
+    }
         public void Deletar(int id)
         {
             _Repository.Deletar(id);

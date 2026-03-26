@@ -31,6 +31,13 @@ namespace Usuarios.API.Repository
             return _connection.QueryFirstOrDefault<Usuario>(sql, new { Id = id });
         }
 
+        public void Atualizar(int id, Usuario usuario)
+        {
+            var sql = "UPDATE Usuario SET Nome_Completo = @NomeCompleto, Data_Nascimento = @DataNascimento, Cpf = @Cpf WHERE Id = @Id";
+            usuario.Id = id;
+            _connection.Execute(sql, usuario);
+        }
+
         public void Deletar(int id)
         {
             var sql = "DELETE FROM usuario WHERE Id = @Id";
