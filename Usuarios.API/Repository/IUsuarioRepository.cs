@@ -8,5 +8,6 @@ namespace Usuarios.API.Repository
         void Criar (Usuario usuario);
         IEnumerable<Usuario> BuscarTodos();
         Usuario BuscarPorId(int id);
+        void Deletar(int id);
     }
 }

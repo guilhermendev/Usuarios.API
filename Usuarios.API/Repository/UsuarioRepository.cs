@@ -30,5 +30,11 @@ namespace Usuarios.API.Repository
             var sql = "SELECT Id, Nome_Completo AS NomeCompleto, Data_Nascimento AS DataNascimento, Cpf FROM usuario WHERE Id = @Id";
             return _connection.QueryFirstOrDefault<Usuario>(sql, new { Id = id });
         }
+
+        public void Deletar(int id)
+        {
+            var sql = "DELETE FROM usuario WHERE Id = @Id";
+            _connection.Execute(sql, new { Id = id });
+        }
     }
 }

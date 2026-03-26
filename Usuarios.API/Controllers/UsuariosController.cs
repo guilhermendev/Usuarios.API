@@ -37,5 +37,13 @@ namespace Usuarios.API.Controllers
                 return NotFound("Usuário não encontrado.");
             return Ok(usuario);
         }
+
+        [HttpDelete("{id}")]
+
+        public IActionResult Deletar(int id)
+        {
+            _service.Deletar(id);
+            return Ok("Ususario deletado com sucesso!");
+        }
     }
 }

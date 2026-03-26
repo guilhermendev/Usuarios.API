@@ -8,5 +8,6 @@ namespace Usuarios.API.Service
         void Criar(UsuarioRequestDto dto);
         IEnumerable<Usuario> BuscarTodos();
         Usuario BuscarPorId(int id);
+        void Deletar(int id);
     }
 }

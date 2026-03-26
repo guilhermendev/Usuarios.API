@@ -32,5 +32,9 @@ namespace Usuarios.API.Service
         {
             return _Repository.BuscarPorId(id);
         }
+        public void Deletar(int id)
+        {
+            _Repository.Deletar(id);
+        }
      }
 }
