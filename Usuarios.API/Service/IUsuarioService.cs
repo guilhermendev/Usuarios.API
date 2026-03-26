@@ -9,5 +9,6 @@ namespace Usuarios.API.Service
         IEnumerable<Usuario> BuscarTodos();
         Usuario BuscarPorId(int id);
         void Atualizar(int id, UsuarioRequestDto dto);
+        void Deletar(int id);
     }
 }

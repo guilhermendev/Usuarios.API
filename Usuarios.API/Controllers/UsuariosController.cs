@@ -45,5 +45,13 @@ namespace Usuarios.API.Controllers
            _service.Atualizar(id, dto);
             return Ok("Usuário atualizado com sucesso!");
         }
+
+        [HttpDelete("{id}")]
+
+        public IActionResult Deletar(int id)
+        {
+            _service.Deletar(id);
+            return Ok("Ususario deletado com sucesso!");
+        }
     }
 }

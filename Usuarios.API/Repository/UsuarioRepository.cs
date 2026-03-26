@@ -37,5 +37,11 @@ namespace Usuarios.API.Repository
             usuario.Id = id;
             _connection.Execute(sql, usuario);
         }
+
+        public void Deletar(int id)
+        {
+            var sql = "DELETE FROM usuario WHERE Id = @Id";
+            _connection.Execute(sql, new { Id = id });
+        }
     }
 }
