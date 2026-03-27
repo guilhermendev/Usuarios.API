@@ -1,13 +1,12 @@
 ﻿using Usuarios.API.DTOs;
-using Usuarios.API.Entidade;
 
 namespace Usuarios.API.Service
 {
     public interface IUsuarioService
     {
         void Criar(UsuarioRequestDto dto);
-        IEnumerable<Usuario> BuscarTodos();
-        Usuario BuscarPorId(int id);
+        IEnumerable<UsuarioResponseDto> BuscarTodos();
+        UsuarioResponseDto BuscarPorId(int id);
         void Atualizar(int id, UsuarioRequestDto dto);
         void Deletar(int id);
     }
