@@ -1,7 +1,6 @@
 ﻿using Usuarios.API.DTOs;
 using Usuarios.API.Mapping;
 using Usuarios.API.Repository;
-using Usuarios.API.Entidade;
 
 namespace Usuarios.API.Service
 {
@@ -23,14 +22,16 @@ namespace Usuarios.API.Service
             _Repository.Criar(usuario);
         }
 
-        public IEnumerable<Usuario> BuscarTodos()
+        public IEnumerable<UsuarioResponseDto> BuscarTodos()
         {
-            return _Repository.BuscarTodos();
+            var usuarios = _Repository.BuscarTodos();
+            return usuarios.Select(u => _mapping.UsuarioToUsuarioResponseDto(u));
         }
 
-        public Usuario BuscarPorId(int id)
+        public UsuarioResponseDto BuscarPorId(int id)
         {
-            return _Repository.BuscarPorId(id);
+            var usuario = _Repository.BuscarPorId(id);
+            return _mapping.UsuarioToUsuarioResponseDto(usuario);
         }
 
         public void Atualizar(int id, UsuarioRequestDto dto)
