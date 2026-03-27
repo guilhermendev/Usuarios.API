@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Usuarios.API.DTOs;
+using Usuarios.API.Entidade;
 using Usuarios.API.Service;
 
 namespace Usuarios.API.Controllers
@@ -19,6 +20,7 @@ namespace Usuarios.API.Controllers
 
 
         [HttpPost]
+        [ProducesResponseType(typeof(string), StatusCodes.Status200OK)]
         public IActionResult Criar([FromBody] UsuarioRequestDto dto)
         {
             _logger.LogInformation("Criando um novo usuário com nome: {Nome}", dto.Nome);
@@ -28,6 +30,7 @@ namespace Usuarios.API.Controllers
         }
 
         [HttpGet]
+        [ProducesResponseType(typeof(IEnumerable<Usuario>), StatusCodes.Status200OK)]
         public IActionResult BuscarTodos()
         {
             _logger.LogInformation("Buscando todos os usuários.");
@@ -37,6 +40,8 @@ namespace Usuarios.API.Controllers
         }
 
         [HttpGet("{id}")]
+        [ProducesResponseType(typeof(Usuario), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status404NotFound)]
         public IActionResult BuscarPorId(int id)
         {
             _logger.LogInformation("Buscando usuário com ID: {Id}", id);
@@ -52,7 +57,7 @@ namespace Usuarios.API.Controllers
         }
 
         [HttpPut("{id}")]
-
+        [ProducesResponseType(typeof(string), StatusCodes.Status200OK)]
         public IActionResult Atualizar(int id, [FromBody] UsuarioRequestDto dto)
         {
             _logger.LogInformation("Atualizando usuário com ID: {Id}", id);
@@ -62,7 +67,7 @@ namespace Usuarios.API.Controllers
         }
 
         [HttpDelete("{id}")]
-
+        [ProducesResponseType(typeof(string), StatusCodes.Status200OK)]
         public IActionResult Deletar(int id)
         {
             _logger.LogInformation("Deletando usuário com ID: {Id}", id);

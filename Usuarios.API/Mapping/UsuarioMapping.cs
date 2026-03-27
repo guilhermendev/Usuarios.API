@@ -14,5 +14,15 @@ namespace Usuarios.API.Mapping
                 Cpf = dto.Cpf
             };
         }
+        public UsuarioResponseDto UsuarioToUsuarioResponseDto(Usuario usuario)
+        {
+            return new UsuarioResponseDto
+            {
+                CodigoUsuario = usuario.Id,
+                NomeUsuario = usuario.NomeCompleto,
+                Nascimento = usuario.DataNascimento,
+                CodigoPessoaFisica = usuario.Cpf
+            };
+        }
     }
 }
