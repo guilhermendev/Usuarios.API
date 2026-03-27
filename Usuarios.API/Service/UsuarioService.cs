@@ -38,8 +38,7 @@ namespace Usuarios.API.Service
         {
             var usuario = _mapping.UsuarioRequestDtoToUsuario(dto);
             _Repository.Atualizar(id, usuario);
-        } 
-
+        }
         public void Deletar(int id)
         {
             _Repository.Deletar(id);
