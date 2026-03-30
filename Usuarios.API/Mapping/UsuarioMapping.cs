@@ -16,6 +16,10 @@ namespace Usuarios.API.Mapping
         }
         public UsuarioResponseDto UsuarioToUsuarioResponseDto(Usuario usuario)
         {
+
+            if (usuario == null)
+                return null;
+
             return new UsuarioResponseDto
             {
                 CodigoUsuario = usuario.Id,
