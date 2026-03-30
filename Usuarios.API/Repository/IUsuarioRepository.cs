@@ -5,10 +5,10 @@ namespace Usuarios.API.Repository
 {
     public interface IUsuarioRepository
     {
-        void Criar (Usuario usuario);
+        bool Criar (Usuario usuario);
         IEnumerable<Usuario> BuscarTodos();
         Usuario BuscarPorId(int id);
-        void Atualizar( int id, Usuario usuario);
-        void Deletar(int id);
+        bool Atualizar( int id, Usuario usuario);
+        bool Deletar(int id);
     }
 }

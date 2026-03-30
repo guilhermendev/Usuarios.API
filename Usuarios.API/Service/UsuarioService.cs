@@ -15,12 +15,14 @@ namespace Usuarios.API.Service
             _mapping = mapping;
         }
 
-        public void Criar(UsuarioRequestDto dto)
+
+        public bool Criar(UsuarioRequestDto dto)
         {
 
             var usuario = _mapping.UsuarioRequestDtoToUsuario(dto);
-            _Repository.Criar(usuario);
+            return _Repository.Criar(usuario);
         }
+
 
         public IEnumerable<UsuarioResponseDto> BuscarTodos()
         {
@@ -28,21 +30,25 @@ namespace Usuarios.API.Service
             return usuarios.Select(u => _mapping.UsuarioToUsuarioResponseDto(u));
         }
 
+
         public UsuarioResponseDto BuscarPorId(int id)
         {
             var usuario = _Repository.BuscarPorId(id);
             return _mapping.UsuarioToUsuarioResponseDto(usuario);
         }
 
-        public void Atualizar(int id, UsuarioRequestDto dto)
+
+        public bool Atualizar(int id, UsuarioRequestDto dto)
         {
             var usuario = _mapping.UsuarioRequestDtoToUsuario(dto);
-            _Repository.Atualizar(id, usuario);
+            return _Repository.Atualizar(id, usuario);
         } 
 
-        public void Deletar(int id)
+
+        public bool Deletar(int id)
         {
-            _Repository.Deletar(id);
+           return _Repository.Deletar(id);
+           
         }
      }
 }
