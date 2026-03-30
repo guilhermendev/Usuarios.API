@@ -25,16 +25,22 @@ namespace Usuarios.API.Repository
 
                 var sql = "INSERT INTO Usuario (Nome_Completo, Data_Nascimento, Cpf) VALUES (@NomeCompleto, @DataNascimento, @Cpf)";
 
-                _connection.Execute(sql, usuario);
+                var result = _connection.Execute(sql, usuario);
+
+                if (result == 0)
+                {
+                    _logger.LogWarning("Nenhum usuário foi inserido: {NomeCompleto}", usuario.NomeCompleto);
+                    return false;
+                }
 
                 _logger.LogInformation("Usuário criado com sucesso: {NomeCompleto}", usuario.NomeCompleto);
 
-                return result > 0;
+                return true;
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Erro ao criar usuário: {NomeCompleto}", usuario.NomeCompleto);
-                throw;
+                return false;
             }
         }
 
@@ -93,20 +99,25 @@ namespace Usuarios.API.Repository
 
                 usuario.Id = id;
 
-                _connection.Execute(sql, usuario);
+                var result =  _connection.Execute(sql, usuario);
 
-                _logger.LogInformation("Usuário com ID: {Id} atualizado com sucesso!", id);
+                if (result == 0)
+                {
+                    _logger.LogWarning("Nenhum usuário foi inserido: {NomeCompleto}", usuario.NomeCompleto);
+                    return false;
+                }
 
-                return result > 0;
+                _logger.LogInformation("Usuário criado com sucesso: {NomeCompleto}", usuario.NomeCompleto);
+                return true;
 
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Erro ao atualizar usuário com ID: {Id}", id);
-                throw;
+                _logger.LogError(ex, "Erro ao criar usuário: {NomeCompleto}", usuario.NomeCompleto);
+                return false;
             }
         }
-
+            
 
         public bool Deletar(int id)
         {
@@ -116,15 +127,20 @@ namespace Usuarios.API.Repository
 
                 var sql = "DELETE FROM usuario WHERE Id = @Id";
 
-                _connection.Execute(sql, new { Id = id });
+                var result = _connection.Execute(sql, new { Id = id });
 
-                _logger.LogInformation("Usuário com ID: {Id} deletado com sucesso!", id);
+                if (result == 0)
+                {
+                    _logger.LogWarning("Nenhum usuário foi deletado com ID: {Id}", id);
+                    return false;
+                }
+               
+                return true;
 
-                return result > 0;
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Erro ao deletar usuário com ID: {Id}", id);
+                _logger.LogError(ex, "Erro ao deletar usuário: {Id}", id);
                 throw;
             }
         }

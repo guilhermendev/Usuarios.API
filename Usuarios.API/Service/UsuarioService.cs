@@ -34,6 +34,10 @@ namespace Usuarios.API.Service
         public UsuarioResponseDto BuscarPorId(int id)
         {
             var usuario = _Repository.BuscarPorId(id);
+
+            if (usuario == null)
+                return null;
+
             return _mapping.UsuarioToUsuarioResponseDto(usuario);
         }
 
