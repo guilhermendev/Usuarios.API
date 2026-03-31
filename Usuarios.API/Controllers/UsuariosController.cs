@@ -20,11 +20,14 @@ namespace Usuarios.API.Controllers
 
         [HttpPost]
         [ProducesResponseType(typeof(string), StatusCodes.Status200OK)]
-        public IActionResult Criar([FromBody] UsuarioRequestDto dto)
+        public async Task<IActionResult> Criar([FromBody] UsuarioRequestDto dto)
         {
             _logger.LogInformation("Criando novo usuário: {Nome}", dto.Nome);
-            _service.Criar(dto);
+
+            await _service.Criar(dto);
+
             _logger.LogInformation("Usuário criado com sucesso.");
+
             return Ok("Usuário criado com sucesso!");
         }
 

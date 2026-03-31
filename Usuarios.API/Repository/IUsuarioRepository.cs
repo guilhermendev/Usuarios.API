@@ -5,7 +5,7 @@ namespace Usuarios.API.Repository
 {
     public interface IUsuarioRepository
     {
-        bool Criar (Usuario usuario);
+        Task<bool> Criar(Usuario usuario);
         IEnumerable<Usuario> BuscarTodos();
         Usuario BuscarPorId(int id);
         bool Atualizar( int id, Usuario usuario);

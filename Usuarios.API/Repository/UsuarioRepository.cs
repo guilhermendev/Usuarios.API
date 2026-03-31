@@ -8,7 +8,7 @@ namespace Usuarios.API.Repository
     {
         private readonly IDbConnection _connection;
         private readonly ILogger<UsuarioRepository> _logger;
-        private int result;
+        
 
         public UsuarioRepository(IDbConnection connection, ILogger<UsuarioRepository> logger)
         {
@@ -17,7 +17,7 @@ namespace Usuarios.API.Repository
         }
 
 
-        public bool Criar(Usuario usuario)
+        public async Task<bool> Criar(Usuario usuario)
         {
             try
             {
@@ -25,7 +25,7 @@ namespace Usuarios.API.Repository
 
                 var sql = "INSERT INTO Usuario (Nome_Completo, Data_Nascimento, Cpf) VALUES (@NomeCompleto, @DataNascimento, @Cpf)";
 
-                var result = _connection.Execute(sql, usuario);
+                var result =await _connection.ExecuteAsync(sql, usuario);
 
                 if (result == 0)
                 {
