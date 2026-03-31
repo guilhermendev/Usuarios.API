@@ -19,6 +19,7 @@ namespace Usuarios.API.Controllers
         }
 
         [HttpPost]
+
         [ProducesResponseType(typeof(string), StatusCodes.Status200OK)]
         public async Task<IActionResult> Criar([FromBody] UsuarioRequestDto dto)
         {
@@ -31,32 +32,45 @@ namespace Usuarios.API.Controllers
             return Ok("Usuário criado com sucesso!");
         }
 
+
         [HttpGet]
+
         [ProducesResponseType(typeof(IEnumerable<Usuario>), StatusCodes.Status200OK)]
         public async Task<IActionResult> BuscarTodos()
         {
             _logger.LogInformation("Buscando todos os usuários.");
+
             var usuarios =await _service.BuscarTodosAsync();
+
             _logger.LogInformation("Total de usuários encontrados: {Total}", usuarios?.Count());
+
             return Ok(usuarios);
         }
 
+
         [HttpGet("{id}")]
+
         [ProducesResponseType(typeof(Usuario), StatusCodes.Status200OK)]
+
         [ProducesResponseType(typeof(string), StatusCodes.Status404NotFound)]
-        public IActionResult BuscarPorId(int id)
+        public async Task<IActionResult> BuscarPorId(int id)
         {
             _logger.LogInformation("Buscando usuário com ID: {Id}", id);
-            var usuario = _service.BuscarPorId(id);
+
+            var usuario =await _service.BuscarPorIdAsync(id);
+
             if (usuario == null)
             {
                 _logger.LogWarning("Usuário com ID {Id} não encontrado.", id);
+
                 return NotFound("Usuário não encontrado.");
             }
             return Ok(usuario);
         }
 
+
         [HttpPut("{id}")]
+
         [ProducesResponseType(typeof(string), StatusCodes.Status200OK)]
         public IActionResult Atualizar(int id, [FromBody] UsuarioRequestDto dto)
         {

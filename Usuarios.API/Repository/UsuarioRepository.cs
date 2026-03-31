@@ -67,7 +67,7 @@ namespace Usuarios.API.Repository
         }
 
 
-        public Usuario BuscarPorId(int id)
+        public async Task<Usuario> BuscarPorIdAsync(int id)
         {
             try
             {
@@ -75,7 +75,7 @@ namespace Usuarios.API.Repository
 
                 var sql = "SELECT Id, Nome_Completo AS NomeCompleto, Data_Nascimento AS DataNascimento, Cpf FROM usuario WHERE Id = @Id";
 
-                var usuario = _connection.QueryFirstOrDefault<Usuario>(sql, new { Id = id });
+                var usuario =await _connection.QueryFirstOrDefaultAsync<Usuario>(sql, new { Id = id });
 
                 _logger.LogInformation("Usuário com ID: {Id} encontrado com sucesso!", id);
 

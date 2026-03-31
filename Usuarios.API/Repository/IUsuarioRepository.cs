@@ -7,7 +7,7 @@ namespace Usuarios.API.Repository
     {
         Task<bool> CriarAsync(Usuario usuario);
         Task <IEnumerable<Usuario>> BuscarTodosAsync();
-        Usuario BuscarPorId(int id);
+        Task<Usuario> BuscarPorIdAsync(int id);
         bool Atualizar( int id, Usuario usuario);
         bool Deletar(int id);
     }
