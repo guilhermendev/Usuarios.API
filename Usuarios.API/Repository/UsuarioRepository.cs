@@ -45,7 +45,7 @@ namespace Usuarios.API.Repository
         }
 
 
-        public IEnumerable<Usuario> BuscarTodos()
+        public async Task<IEnumerable<Usuario>> BuscarTodosAsync()
         {
             try
             {
@@ -53,7 +53,7 @@ namespace Usuarios.API.Repository
 
                 var sql = "SELECT Id, Nome_Completo AS NomeCompleto, Data_Nascimento AS DataNascimento, Cpf FROM usuario";
 
-                var usuarios = _connection.Query<Usuario>(sql);
+                var usuarios = await _connection.QueryAsync<Usuario>(sql);
 
                 _logger.LogInformation("Usuários encontrados com sucesso!");
 

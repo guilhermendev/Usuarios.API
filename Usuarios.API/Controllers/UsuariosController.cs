@@ -33,10 +33,10 @@ namespace Usuarios.API.Controllers
 
         [HttpGet]
         [ProducesResponseType(typeof(IEnumerable<Usuario>), StatusCodes.Status200OK)]
-        public IActionResult BuscarTodos()
+        public async Task<IActionResult> BuscarTodos()
         {
             _logger.LogInformation("Buscando todos os usuários.");
-            var usuarios = _service.BuscarTodos();
+            var usuarios =await _service.BuscarTodosAsync();
             _logger.LogInformation("Total de usuários encontrados: {Total}", usuarios?.Count());
             return Ok(usuarios);
         }

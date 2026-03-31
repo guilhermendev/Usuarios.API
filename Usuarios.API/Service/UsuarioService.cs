@@ -24,9 +24,9 @@ namespace Usuarios.API.Service
         }
 
 
-        public IEnumerable<UsuarioResponseDto> BuscarTodos()
+        public async Task<IEnumerable<UsuarioResponseDto>> BuscarTodosAsync()
         {
-            var usuarios = _Repository.BuscarTodos();
+            var usuarios = await _Repository.BuscarTodosAsync();
             return usuarios.Select(u => _mapping.UsuarioToUsuarioResponseDto(u));
         }
 
