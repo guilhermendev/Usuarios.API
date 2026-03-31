@@ -40,7 +40,7 @@ namespace Usuarios.API.Controllers
         {
             _logger.LogInformation("Buscando todos os usuários.");
 
-            var usuarios =await _service.BuscarTodosAsync();
+            var usuarios = await _service.BuscarTodosAsync();
 
             _logger.LogInformation("Total de usuários encontrados: {Total}", usuarios?.Count());
 
@@ -57,7 +57,7 @@ namespace Usuarios.API.Controllers
         {
             _logger.LogInformation("Buscando usuário com ID: {Id}", id);
 
-            var usuario =await _service.BuscarPorIdAsync(id);
+            var usuario = await _service.BuscarPorIdAsync(id);
 
             if (usuario == null)
             {

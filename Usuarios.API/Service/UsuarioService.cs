@@ -33,7 +33,7 @@ namespace Usuarios.API.Service
 
         public async Task<UsuarioResponseDto> BuscarPorIdAsync(int id)
         {
-            var usuario =await _Repository.BuscarPorIdAsync(id);
+            var usuario = await _Repository.BuscarPorIdAsync(id);
 
             if (usuario == null)
                 return null;

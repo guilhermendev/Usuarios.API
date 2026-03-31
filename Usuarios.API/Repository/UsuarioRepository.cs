@@ -25,7 +25,7 @@ namespace Usuarios.API.Repository
 
                 var sql = "INSERT INTO Usuario (Nome_Completo, Data_Nascimento, Cpf) VALUES (@NomeCompleto, @DataNascimento, @Cpf)";
 
-                var result =await _connection.ExecuteAsync(sql, usuario);
+                var result = await _connection.ExecuteAsync(sql, usuario);
 
                 if (result == 0)
                 {
@@ -75,7 +75,7 @@ namespace Usuarios.API.Repository
 
                 var sql = "SELECT Id, Nome_Completo AS NomeCompleto, Data_Nascimento AS DataNascimento, Cpf FROM usuario WHERE Id = @Id";
 
-                var usuario =await _connection.QueryFirstOrDefaultAsync<Usuario>(sql, new { Id = id });
+                var usuario = await _connection.QueryFirstOrDefaultAsync<Usuario>(sql, new { Id = id });
 
                 _logger.LogInformation("Usuário com ID: {Id} encontrado com sucesso!", id);
 
@@ -99,7 +99,7 @@ namespace Usuarios.API.Repository
 
                 usuario.Id = id;
 
-                var result =await  _connection.ExecuteAsync(sql, usuario);
+                var result = await  _connection.ExecuteAsync(sql, usuario);
 
                 if (result == 0)
                 {
@@ -127,7 +127,7 @@ namespace Usuarios.API.Repository
 
                 var sql = "DELETE FROM usuario WHERE Id = @Id";
 
-                var result =await _connection.ExecuteAsync(sql, new { Id = id });
+                var result = await _connection.ExecuteAsync(sql, new { Id = id });
 
                 if (result == 0)
                 {
