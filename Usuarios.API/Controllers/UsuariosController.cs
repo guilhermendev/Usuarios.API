@@ -72,11 +72,15 @@ namespace Usuarios.API.Controllers
         [HttpPut("{id}")]
 
         [ProducesResponseType(typeof(string), StatusCodes.Status200OK)]
-        public IActionResult Atualizar(int id, [FromBody] UsuarioRequestDto dto)
+
+        public async Task<IActionResult> Atualizarasync(int id, [FromBody] UsuarioRequestDto dto)
         {
             _logger.LogInformation("Atualizando usuário com ID: {Id}", id);
-            _service.Atualizar(id, dto);
+
+            await _service.AtualizarAsync(id, dto);
+
             _logger.LogInformation("Usuário com ID {Id} atualizado com sucesso.", id);
+
             return Ok("Usuário atualizado com sucesso!");
         }
 

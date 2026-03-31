@@ -89,7 +89,7 @@ namespace Usuarios.API.Repository
         }
 
 
-        public bool Atualizar(int id, Usuario usuario)
+        public async Task<bool> AtualizarAsync(int id, Usuario usuario)
         {
             try
             {
@@ -99,7 +99,7 @@ namespace Usuarios.API.Repository
 
                 usuario.Id = id;
 
-                var result =  _connection.Execute(sql, usuario);
+                var result =await  _connection.ExecuteAsync(sql, usuario);
 
                 if (result == 0)
                 {

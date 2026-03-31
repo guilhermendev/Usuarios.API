@@ -42,10 +42,10 @@ namespace Usuarios.API.Service
         }
 
 
-        public bool Atualizar(int id, UsuarioRequestDto dto)
+        public async Task<bool> AtualizarAsync(int id, UsuarioRequestDto dto)
         {
             var usuario = _mapping.UsuarioRequestDtoToUsuario(dto);
-            return _Repository.Atualizar(id, usuario);
+            return await _Repository.AtualizarAsync(id, usuario);
         } 
 
 
