@@ -8,6 +8,6 @@ namespace Usuarios.API.Service
         Task<IEnumerable<UsuarioResponseDto>> BuscarTodosAsync();
         Task<UsuarioResponseDto> BuscarPorIdAsync(int id);
         Task<bool> AtualizarAsync(int id, UsuarioRequestDto dto);
-        bool Deletar(int id);
+        Task<bool> DeletarAsync(int id);
     }
 }

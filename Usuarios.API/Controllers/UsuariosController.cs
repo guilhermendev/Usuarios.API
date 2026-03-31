@@ -84,13 +84,18 @@ namespace Usuarios.API.Controllers
             return Ok("Usuário atualizado com sucesso!");
         }
 
+
         [HttpDelete("{id}")]
+
         [ProducesResponseType(typeof(string), StatusCodes.Status200OK)]
-        public IActionResult Deletar(int id)
+        public async Task<IActionResult> DeletarAsync(int id)
         {
             _logger.LogInformation("Deletando usuário com ID: {Id}", id);
-            _service.Deletar(id);
+
+            await _service.DeletarAsync(id);
+
             _logger.LogInformation("Usuário com ID {Id} deletado com sucesso.", id);
+
             return Ok("Usuário deletado com sucesso!");
         }
     }

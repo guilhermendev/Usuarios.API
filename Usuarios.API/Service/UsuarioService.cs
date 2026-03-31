@@ -45,13 +45,14 @@ namespace Usuarios.API.Service
         public async Task<bool> AtualizarAsync(int id, UsuarioRequestDto dto)
         {
             var usuario = _mapping.UsuarioRequestDtoToUsuario(dto);
+
             return await _Repository.AtualizarAsync(id, usuario);
         } 
 
 
-        public bool Deletar(int id)
+        public async Task<bool> DeletarAsync(int id)
         {
-           return _Repository.Deletar(id);
+           return await _Repository.DeletarAsync(id);
            
         }
      }

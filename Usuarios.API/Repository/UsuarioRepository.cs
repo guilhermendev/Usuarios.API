@@ -119,7 +119,7 @@ namespace Usuarios.API.Repository
         }
             
 
-        public bool Deletar(int id)
+        public async Task<bool> DeletarAsync(int id)
         {
             try
             {
@@ -127,7 +127,7 @@ namespace Usuarios.API.Repository
 
                 var sql = "DELETE FROM usuario WHERE Id = @Id";
 
-                var result = _connection.Execute(sql, new { Id = id });
+                var result =await _connection.ExecuteAsync(sql, new { Id = id });
 
                 if (result == 0)
                 {
