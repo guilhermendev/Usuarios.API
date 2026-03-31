@@ -16,11 +16,11 @@ namespace Usuarios.API.Service
         }
 
 
-        public async Task<bool> Criar(UsuarioRequestDto dto)
+        public async Task<bool> CriarAsync(UsuarioRequestDto dto)
         {
 
             var usuario = _mapping.UsuarioRequestDtoToUsuario(dto);
-            return await _Repository.Criar(usuario);
+            return await _Repository.CriarAsync(usuario);
         }
 
 

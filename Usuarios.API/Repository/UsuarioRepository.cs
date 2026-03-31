@@ -17,7 +17,7 @@ namespace Usuarios.API.Repository
         }
 
 
-        public async Task<bool> Criar(Usuario usuario)
+        public async Task<bool> CriarAsync(Usuario usuario)
         {
             try
             {

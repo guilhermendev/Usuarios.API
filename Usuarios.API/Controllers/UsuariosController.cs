@@ -24,7 +24,7 @@ namespace Usuarios.API.Controllers
         {
             _logger.LogInformation("Criando novo usuário: {Nome}", dto.Nome);
 
-            await _service.Criar(dto);
+            await _service.CriarAsync(dto);
 
             _logger.LogInformation("Usuário criado com sucesso.");
 
