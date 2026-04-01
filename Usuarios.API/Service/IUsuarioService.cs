@@ -4,10 +4,10 @@ namespace Usuarios.API.Service
 {
     public interface IUsuarioService
     {
-        bool Criar(UsuarioRequestDto dto);
-        IEnumerable<UsuarioResponseDto> BuscarTodos();
-        UsuarioResponseDto BuscarPorId(int id);
-        bool Atualizar(int id, UsuarioRequestDto dto);
-        bool Deletar(int id);
+        Task<bool> CriarAsync(UsuarioRequestDto dto);
+        Task<IEnumerable<UsuarioResponseDto>> BuscarTodosAsync();
+        Task<UsuarioResponseDto> BuscarPorIdAsync(int id);
+        Task<bool> AtualizarAsync(int id, UsuarioRequestDto dto);
+        Task<bool> DeletarAsync(int id);
     }
 }

@@ -8,7 +8,7 @@ namespace Usuarios.API.Repository
     {
         private readonly IDbConnection _connection;
         private readonly ILogger<UsuarioRepository> _logger;
-        private int result;
+        
 
         public UsuarioRepository(IDbConnection connection, ILogger<UsuarioRepository> logger)
         {
@@ -17,7 +17,7 @@ namespace Usuarios.API.Repository
         }
 
 
-        public bool Criar(Usuario usuario)
+        public async Task<bool> CriarAsync(Usuario usuario)
         {
             try
             {
@@ -25,7 +25,7 @@ namespace Usuarios.API.Repository
 
                 var sql = "INSERT INTO Usuario (Nome_Completo, Data_Nascimento, Cpf) VALUES (@NomeCompleto, @DataNascimento, @Cpf)";
 
-                var result = _connection.Execute(sql, usuario);
+                var result = await _connection.ExecuteAsync(sql, usuario);
 
                 if (result == 0)
                 {
@@ -45,7 +45,7 @@ namespace Usuarios.API.Repository
         }
 
 
-        public IEnumerable<Usuario> BuscarTodos()
+        public async Task<IEnumerable<Usuario>> BuscarTodosAsync()
         {
             try
             {
@@ -53,7 +53,7 @@ namespace Usuarios.API.Repository
 
                 var sql = "SELECT Id, Nome_Completo AS NomeCompleto, Data_Nascimento AS DataNascimento, Cpf FROM usuario";
 
-                var usuarios = _connection.Query<Usuario>(sql);
+                var usuarios = await _connection.QueryAsync<Usuario>(sql);
 
                 _logger.LogInformation("Usuários encontrados com sucesso!");
 
@@ -67,7 +67,7 @@ namespace Usuarios.API.Repository
         }
 
 
-        public Usuario BuscarPorId(int id)
+        public async Task<Usuario> BuscarPorIdAsync(int id)
         {
             try
             {
@@ -75,7 +75,7 @@ namespace Usuarios.API.Repository
 
                 var sql = "SELECT Id, Nome_Completo AS NomeCompleto, Data_Nascimento AS DataNascimento, Cpf FROM usuario WHERE Id = @Id";
 
-                var usuario = _connection.QueryFirstOrDefault<Usuario>(sql, new { Id = id });
+                var usuario = await _connection.QueryFirstOrDefaultAsync<Usuario>(sql, new { Id = id });
 
                 _logger.LogInformation("Usuário com ID: {Id} encontrado com sucesso!", id);
 
@@ -89,7 +89,7 @@ namespace Usuarios.API.Repository
         }
 
 
-        public bool Atualizar(int id, Usuario usuario)
+        public async Task<bool> AtualizarAsync(int id, Usuario usuario)
         {
             try
             {
@@ -99,7 +99,7 @@ namespace Usuarios.API.Repository
 
                 usuario.Id = id;
 
-                var result =  _connection.Execute(sql, usuario);
+                var result = await  _connection.ExecuteAsync(sql, usuario);
 
                 if (result == 0)
                 {
@@ -119,7 +119,7 @@ namespace Usuarios.API.Repository
         }
             
 
-        public bool Deletar(int id)
+        public async Task<bool> DeletarAsync(int id)
         {
             try
             {
@@ -127,7 +127,7 @@ namespace Usuarios.API.Repository
 
                 var sql = "DELETE FROM usuario WHERE Id = @Id";
 
-                var result = _connection.Execute(sql, new { Id = id });
+                var result = await _connection.ExecuteAsync(sql, new { Id = id });
 
                 if (result == 0)
                 {

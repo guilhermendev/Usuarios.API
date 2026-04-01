@@ -16,24 +16,24 @@ namespace Usuarios.API.Service
         }
 
 
-        public bool Criar(UsuarioRequestDto dto)
+        public async Task<bool> CriarAsync(UsuarioRequestDto dto)
         {
 
             var usuario = _mapping.UsuarioRequestDtoToUsuario(dto);
-            return _Repository.Criar(usuario);
+            return await _Repository.CriarAsync(usuario);
         }
 
 
-        public IEnumerable<UsuarioResponseDto> BuscarTodos()
+        public async Task<IEnumerable<UsuarioResponseDto>> BuscarTodosAsync()
         {
-            var usuarios = _Repository.BuscarTodos();
+            var usuarios = await _Repository.BuscarTodosAsync();
             return usuarios.Select(u => _mapping.UsuarioToUsuarioResponseDto(u));
         }
 
 
-        public UsuarioResponseDto BuscarPorId(int id)
+        public async Task<UsuarioResponseDto> BuscarPorIdAsync(int id)
         {
-            var usuario = _Repository.BuscarPorId(id);
+            var usuario = await _Repository.BuscarPorIdAsync(id);
 
             if (usuario == null)
                 return null;
@@ -42,16 +42,17 @@ namespace Usuarios.API.Service
         }
 
 
-        public bool Atualizar(int id, UsuarioRequestDto dto)
+        public async Task<bool> AtualizarAsync(int id, UsuarioRequestDto dto)
         {
             var usuario = _mapping.UsuarioRequestDtoToUsuario(dto);
-            return _Repository.Atualizar(id, usuario);
+
+            return await _Repository.AtualizarAsync(id, usuario);
         } 
 
 
-        public bool Deletar(int id)
+        public async Task<bool> DeletarAsync(int id)
         {
-           return _Repository.Deletar(id);
+           return await _Repository.DeletarAsync(id);
            
         }
      }

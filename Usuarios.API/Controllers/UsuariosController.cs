@@ -19,57 +19,83 @@ namespace Usuarios.API.Controllers
         }
 
         [HttpPost]
+
         [ProducesResponseType(typeof(string), StatusCodes.Status200OK)]
-        public IActionResult Criar([FromBody] UsuarioRequestDto dto)
+        public async Task<IActionResult> Criar([FromBody] UsuarioRequestDto dto)
         {
             _logger.LogInformation("Criando novo usuário: {Nome}", dto.Nome);
-            _service.Criar(dto);
+
+            await _service.CriarAsync(dto);
+
             _logger.LogInformation("Usuário criado com sucesso.");
+
             return Ok("Usuário criado com sucesso!");
         }
 
+
         [HttpGet]
+
         [ProducesResponseType(typeof(IEnumerable<Usuario>), StatusCodes.Status200OK)]
-        public IActionResult BuscarTodos()
+        public async Task<IActionResult> BuscarTodos()
         {
             _logger.LogInformation("Buscando todos os usuários.");
-            var usuarios = _service.BuscarTodos();
+
+            var usuarios = await _service.BuscarTodosAsync();
+
             _logger.LogInformation("Total de usuários encontrados: {Total}", usuarios?.Count());
+
             return Ok(usuarios);
         }
 
+
         [HttpGet("{id}")]
+
         [ProducesResponseType(typeof(Usuario), StatusCodes.Status200OK)]
+
         [ProducesResponseType(typeof(string), StatusCodes.Status404NotFound)]
-        public IActionResult BuscarPorId(int id)
+        public async Task<IActionResult> BuscarPorId(int id)
         {
             _logger.LogInformation("Buscando usuário com ID: {Id}", id);
-            var usuario = _service.BuscarPorId(id);
+
+            var usuario = await _service.BuscarPorIdAsync(id);
+
             if (usuario == null)
             {
                 _logger.LogWarning("Usuário com ID {Id} não encontrado.", id);
+
                 return NotFound("Usuário não encontrado.");
             }
             return Ok(usuario);
         }
 
+
         [HttpPut("{id}")]
+
         [ProducesResponseType(typeof(string), StatusCodes.Status200OK)]
-        public IActionResult Atualizar(int id, [FromBody] UsuarioRequestDto dto)
+
+        public async Task<IActionResult> Atualizarasync(int id, [FromBody] UsuarioRequestDto dto)
         {
             _logger.LogInformation("Atualizando usuário com ID: {Id}", id);
-            _service.Atualizar(id, dto);
+
+            await _service.AtualizarAsync(id, dto);
+
             _logger.LogInformation("Usuário com ID {Id} atualizado com sucesso.", id);
+
             return Ok("Usuário atualizado com sucesso!");
         }
 
+
         [HttpDelete("{id}")]
+
         [ProducesResponseType(typeof(string), StatusCodes.Status200OK)]
-        public IActionResult Deletar(int id)
+        public async Task<IActionResult> DeletarAsync(int id)
         {
             _logger.LogInformation("Deletando usuário com ID: {Id}", id);
-            _service.Deletar(id);
+
+            await _service.DeletarAsync(id);
+
             _logger.LogInformation("Usuário com ID {Id} deletado com sucesso.", id);
+
             return Ok("Usuário deletado com sucesso!");
         }
     }

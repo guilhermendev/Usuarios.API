@@ -5,10 +5,10 @@ namespace Usuarios.API.Repository
 {
     public interface IUsuarioRepository
     {
-        bool Criar (Usuario usuario);
-        IEnumerable<Usuario> BuscarTodos();
-        Usuario BuscarPorId(int id);
-        bool Atualizar( int id, Usuario usuario);
-        bool Deletar(int id);
+        Task<bool> CriarAsync(Usuario usuario);
+        Task <IEnumerable<Usuario>> BuscarTodosAsync();
+        Task<Usuario> BuscarPorIdAsync(int id);
+        Task<bool> AtualizarAsync( int id, Usuario usuario);
+        Task<bool> DeletarAsync(int id);
     }
 }
