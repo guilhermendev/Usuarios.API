@@ -30,7 +30,6 @@ namespace Usuarios.Tests
         public async Task CriarAsync_DeveRetornarTrue_QuandoCriadoComSucesso()
         {
             var dto = new UsuarioRequestDto();
-            var usuario = new Usuario();
 
             _repositoryMock.Setup(r => r.CriarAsync(It.IsAny<Usuario>()))
                 .ReturnsAsync(true);
@@ -44,7 +43,6 @@ namespace Usuarios.Tests
         public async Task CriarAsync_DeveRetornarFalse_QuandoFalhar()
         {
             var dto = new UsuarioRequestDto();
-            var usuario = new Usuario();
 
             _repositoryMock.Setup(r => r.CriarAsync(It.IsAny<Usuario>()))
                            .ReturnsAsync(false);

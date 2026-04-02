@@ -1,11 +1,10 @@
-﻿using Xunit;
-using Moq;
-
-
+﻿using Moq;
+using Usuarios.API.DTOs;
 using Usuarios.API.Entidade;
 using Usuarios.API.Mapping;
 using Usuarios.API.Repository;
 using Usuarios.API.Service;
+using Xunit;
 
 namespace Usuarios.Tests
 {
@@ -37,8 +36,10 @@ namespace Usuarios.Tests
             var resultado = await _service.BuscarPorIdAsync(1);
 
             Assert.NotNull(resultado);
+            Assert.IsType<UsuarioResponseDto>(resultado);
+            Assert.Equal(usuario.Id, resultado.CodigoUsuario);
         }
-
+            
         [Fact]
         public async Task BuscarPorIdAsync_DeveRetornarNull_QuandoNaoEncontrado()
         {

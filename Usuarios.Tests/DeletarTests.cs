@@ -34,6 +34,7 @@ namespace Usuarios.Tests
             var resultado = await _service.DeletarAsync(1);
 
             Assert.True(resultado);
+            _repositoryMock.Verify(r => r.DeletarAsync(1), Times.Once);
         }
 
         [Fact]

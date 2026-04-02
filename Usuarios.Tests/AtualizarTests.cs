@@ -38,6 +38,11 @@ namespace Usuarios.Tests
             var resultado = await _service.AtualizarAsync(1, dto);
 
             Assert.True(resultado);
+
+            _repositoryMock.Verify(r => r.AtualizarAsync(
+                It.IsAny<int>(),
+                It.Is<Usuario>(u => u.NomeCompleto == dto.Nome)
+            ), Times.Once);
         }
 
         [Fact]
@@ -51,6 +56,9 @@ namespace Usuarios.Tests
             var resultado = await _service.AtualizarAsync(1, dto);
 
             Assert.False(resultado);
+            _repositoryMock.Verify(r => r.AtualizarAsync(It.IsAny<int>(), It.IsAny<Usuario>()),
+            Times.Once
+            );
         }
     }
 }

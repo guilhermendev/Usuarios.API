@@ -31,12 +31,13 @@ namespace Usuarios.Tests
         }
 
         [Fact]
-        public async Task BuscarTodosAsync_DeveRetornarLista_ComDados()
+        public async Task BuscarTodosAsyncDeveRetornarListaComDados()
         {
             var usuarios = new List<Usuario>
             {
-                new Usuario(),
-                new Usuario()
+                new Usuario{Id = 1, NomeCompleto = ""},
+                new Usuario{Id = 2, NomeCompleto = ""},
+                new Usuario{Id = 3, NomeCompleto = ""}
             };
 
             _repositoryMock.Setup(r => r.BuscarTodosAsync())
@@ -45,6 +46,8 @@ namespace Usuarios.Tests
             var resultado = await _service.BuscarTodosAsync();
 
             Assert.NotEmpty(resultado);
+            Assert.All(resultado, u => Assert.False(string.IsNullOrEmpty(u.NomeUsuario)));
+            Assert.True(resultado.Count() >= 1);
         }
 
         [Fact]
@@ -56,6 +59,7 @@ namespace Usuarios.Tests
             var resultado = await _service.BuscarTodosAsync();
 
             Assert.Empty(resultado);
+            Assert.IsAssignableFrom<IEnumerable<UsuarioResponseDto>>(resultado);
         }
     }
 }
